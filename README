@@ -1,0 +1,5 @@
+Slackware-service is a wrapper script that tries to mimic redhat "service" command.
+
+When you call "service something start" (for example) it simply runs "/etc/rc.d/rc.something start", thats it.
+Since I spent many hours with redhat/rhel/rhel-based systems I stick with command called "service", and find it much
+easier to use this kind of script instead forcing my habbit to change.

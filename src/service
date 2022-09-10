@@ -1,0 +1,46 @@
+#!/bin/bash
+
+function help() {
+	echo "Usage: $0 service_name command"
+}
+
+
+if [[ $1 == '' ]]; then
+	echo "Service_name is required!"
+	help
+	exit 1
+fi
+
+if [[ $1 == '--help' ]]; then
+	help
+	exit 0
+fi
+
+if [[ $1 == '-h' ]]; then
+	help
+	exit 0
+fi
+
+if [[ $2 == '' ]]; then
+	echo "Command is required!"
+	help
+	exit 1
+fi
+
+if [[ -e /etc/rc.d/rc.$1 ]]; then
+	:
+else
+	echo "/etc/rc.d/rc.$1 does not exist"
+	exit 1
+fi
+
+if [[ -x /etc/rc.d/rc.$1 ]]; then
+	:
+else
+	echo "Bit +x is not set on /etc/rc.d/rc.$1"
+	exit 1
+fi
+
+CMD=$1
+shift 1
+exec "/etc/rc.d/rc.$CMD" "$@"
